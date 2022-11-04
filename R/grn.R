@@ -349,7 +349,7 @@ fit_grn_models.SeuratPlus <- function(
         gene_tfs <- purrr::reduce(map(frml_string, function(x) x$tfs), union)
         gene_x <- gene_data[gene_groups, union(g, gene_tfs), drop=FALSE]
         model_mat <- as.data.frame(cbind(gene_x, peak_x))
-        if (scale) model_mat <- as.data.frame(scale(as.matrix(model_mat)))
+        if (scale) model_mat <- as.data.frame(scale(model.matrix(model_mat)))
         colnames(model_mat) <- str_replace_all(colnames(model_mat), '-', '_')
 
         log_message('Fitting model with ', nfeats, ' variables for ', g, verbose=verbose==2)

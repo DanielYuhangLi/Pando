@@ -307,7 +307,7 @@ fit_grn_models.SeuratPlus <- function(
         gene_tfs <- purrr::reduce(gene_peak_tfs, union)
         tf_x <- gene_data[gene_groups, gene_tfs, drop=FALSE]
         tf_g_cor <- sparse_cor(tf_x, g_x)
-        tf_g_cor[is.na(tf_g_cor)] <- 0
+        attr(tf_g_cor,"tf_g_cor")[is.na(attr(tf_g_cor,"tf_g_cor"))] <- 0
         tfs_use <- rownames(tf_g_cor)[abs(tf_g_cor[, 1]) > tf_cor]
         if (length(tfs_use)==0){
             log_message('Warning: No correlating TFs found for ', g, verbose=verbose==2)
